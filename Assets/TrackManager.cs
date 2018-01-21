@@ -117,7 +117,18 @@ public class TrackManager : MonoBehaviour {
 	
 	void UpdatePlayer () {
 		playerGO.transform.position = letterInfoDictionary[nextStartLetter].playerPos;
-		playerGO.transform.up = letterInfoDictionary[nextStartLetter].playerRotation;
+		// playerGO.transform.up = letterInfoDictionary[nextStartLetter].playerRotation;
+		
+		// playerGO.transform.eulerAngles = letterInfoDictionary[nextStartLetter].playerRotation;
+		// playerGO.transform.eulerAngles = letterInfoDictionary[nextStartLetter].playerRotation * 90;
+		
+		// playerGO.transform.rotation = Quaternion.LookRotation(letterInfoDictionary[nextStartLetter].playerRotation);
+		// playerGO.transform.rotation = Quaternion.LookRotation(letterInfoDictionary[nextStartLetter].playerRotation, Vector3.up);
+		
+		
+		Vector2 dir = letterInfoDictionary[nextStartLetter].playerRotation;
+		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
+		playerGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 	
 	// TODO: Make it so cannot get same track twice?
