@@ -9,7 +9,7 @@ public class TrackManager : MonoBehaviour {
 
 	public SpriteRenderer godTrack;
 	public Sprite[] trackSprites;
-	
+		
 	public struct TrackInfo {
 		public string startLetter;
 		public string endLetter;
@@ -211,44 +211,44 @@ public class TrackManager : MonoBehaviour {
 		switch (nextStartLetter)
 		{
 			case "A":
-				return Quaternion.Euler(0, 0, 0);
 				flipTrack = false;
+				return Quaternion.Euler(0, 0, 0);
 
 			case "B":
-				return Quaternion.Euler(0, 0, 0);
 				flipTrack = false;
+				return Quaternion.Euler(0, 0, 0);	
 
 			case "C":
-				return Quaternion.Euler(0, 0, 0);
 				flipTrack = false;
+				return Quaternion.Euler(0, 0, 0);
 
 			case "D":
-				return Quaternion.Euler(0, 0, 0);
 				flipTrack = false;
+				return Quaternion.Euler(0, 0, 0);
 
 			case "E":
-				return Quaternion.Euler(0, 0, 0);
 				flipTrack = false;
+				return Quaternion.Euler(0, 0, 0);
 
 			case "F":
-				return Quaternion.Euler(0, 180, 0);
 				flipTrack = true;
+				return Quaternion.Euler(0, 180, 0);
 
 			case "G":
-				return Quaternion.Euler(0, 180, 0);
 				flipTrack = true;
+				return Quaternion.Euler(0, 180, 0);
 
 			case "H":
-				return Quaternion.Euler(180, 0, 0);
 				flipTrack = true;
+				return Quaternion.Euler(180, 0, 0);
 
 			case "I":
-				return Quaternion.Euler(180, 0, 0);
 				flipTrack = true;
+				return Quaternion.Euler(180, 0, 0);
 
 			case "J":
-				return Quaternion.Euler(180, 0, 0);
 				flipTrack = true;
+				return Quaternion.Euler(180, 0, 0);
 
 			default:
 				return transform.rotation;
