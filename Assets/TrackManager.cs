@@ -9,6 +9,7 @@ public class TrackManager : MonoBehaviour {
 
 	public SpriteRenderer godTrack;
 	public Sprite[] trackSprites;
+	public GameObject playerGO;
 		
 	public struct TrackInfo {
 		public string startLetter;
@@ -21,8 +22,13 @@ public class TrackManager : MonoBehaviour {
 		public Vector2 playerPos;
 		public Vector2 playerRotation;
 		
-		public Vector2 layoutRotation;
+		public LetterInfo (Vector2 pP, Vector2 pR) {
+			playerPos = pP;
+			playerRotation = pR;
+		}
 	}
+	
+	private Dictionary<string, LetterInfo> letterInfoDictionary = new Dictionary<string, LetterInfo>();
 	
 	private TrackInfo[] trackInfo;
 	
@@ -37,8 +43,6 @@ public class TrackManager : MonoBehaviour {
 		trackInfo = new TrackInfo[trackSprites.Length];
 		for (int i = 0; i < trackSprites.Length; i++)
 		{
-			// trackInfo[i] = new TrackInfo();
-			
 			string spriteName = trackSprites[i].name;
 			
 			trackInfo[i].startLetter = spriteName.Split(new string[] {"-"}, StringSplitOptions.RemoveEmptyEntries)[0];
@@ -46,20 +50,50 @@ public class TrackManager : MonoBehaviour {
 			trackInfo[i].sprite = trackSprites[i];
 		}
 		
-		// Debug.Log(trackInfo[17].startLetter);
+		LetterInfo letterA = new LetterInfo(new Vector2(-9.5f, -2), Vector2.right);
+		letterInfoDictionary.Add("A", letterA);
 		
-		// ConvertNextStartLetter();
+		LetterInfo letterB = new LetterInfo(new Vector2(-9.5f, 2), Vector2.right);
+		letterInfoDictionary.Add("B", letterB);
 		
-		// InvokeRepeating("ChangeTrack", 0, 1.5f);
-		ChangeTrack();
+		LetterInfo letterC = new LetterInfo(new Vector2(-5, 5.75f), Vector2.down);
+		letterInfoDictionary.Add("C", letterC);
+		
+		LetterInfo letterD = new LetterInfo(new Vector2(0, 5.75f), Vector2.down);
+		letterInfoDictionary.Add("D", letterD);
+		
+		LetterInfo letterE = new LetterInfo(new Vector2(5, 5.75f), Vector2.down);
+		letterInfoDictionary.Add("E", letterE);
+		
+		LetterInfo letterF = new LetterInfo(new Vector2(9.5f, -2), Vector2.left);
+		letterInfoDictionary.Add("F", letterF);
+		
+		LetterInfo letterG = new LetterInfo(new Vector2(9.5f, 2), Vector2.left);
+		letterInfoDictionary.Add("G", letterG);
+		
+		LetterInfo letterH = new LetterInfo(new Vector2(-5, -5.75f), Vector2.up);
+		letterInfoDictionary.Add("H", letterH);
+		
+		LetterInfo letterI = new LetterInfo(new Vector2(0, -5.75f), Vector2.up);
+		letterInfoDictionary.Add("I", letterI);
+		
+		LetterInfo letterJ = new LetterInfo(new Vector2(5, -5.75f), Vector2.up);
+		letterInfoDictionary.Add("J", letterJ);
+		
+		// ChangeTrack();
 	}
 	
-	void Update () {
-		if (Input.GetKeyDown("space"))
-		{
-			ChangeTrack();
-		}
-	}
+	// void Update () {
+		// if (Input.GetKeyDown("space"))
+		// {
+			// ChangeTrack();
+		// }
+	// }
+	
+	// void UpdateScreen () {
+		// ChangeTrack();
+		// UpdatePlayer();
+	// }
 	
 	void ChangeTrack () {
 		
@@ -67,106 +101,31 @@ public class TrackManager : MonoBehaviour {
 		
 		TrackInfo newTrack = possibleTracks[UnityEngine.Random.Range(0, possibleTracks.Length)];
 		
-		// Sprite newTrackSprite = trackSprites[Random.Range(0, 45)];
 		Sprite newTrackSprite = newTrack.sprite;
 		
 		godTrack.sprite = newTrackSprite;
-		godTrack.transform.rotation = GetRotation();
 		
 		Destroy(pCol);
 		pCol = godTrack.gameObject.AddComponent<PolygonCollider2D>();
 		
-		string debugT = nextStartLetter;
+		UpdatePlayer();
 		
-		string flippedLetter = GetFlippedLetter(newTrack.endLetter);
-		nextStartLetter = GetOppositeLetter(flippedLetter);
-		// nextStartLetter = GetOppositeLetter(newTrack.endLetter);
-		// ConvertNextStartLetter();
+		nextStartLetter = GetOppositeLetter(newTrack.endLetter);	
 		
-		// Debug.Log("New Track. EndLetter " + newTrack.endLetter);
-		// Debug.Log("Get Opposite Letter " + nextStartLetter);
-		// Debug.Log("Convert " + ConvertNextStartLetter());
-		
-		Debug.Log("This track startLetter:" + debugT
-		+ " New Track endLetter:" + newTrack.endLetter
-		+ " New Track flippedLetter:" + flippedLetter
-		+ " Get Opposite Letter:" + nextStartLetter
-		+ " Convert:" + ConvertNextStartLetter());
-		
+		// UpdatePlayer();
 	}
 	
-	// TrackInfo GetNewTrack () {
+	void UpdatePlayer () {
+		playerGO.transform.position = letterInfoDictionary[nextStartLetter].playerPos;
+		playerGO.transform.up = letterInfoDictionary[nextStartLetter].playerRotation;
+	}
+	
+	// TODO: Make it so cannot get same track twice?
 	TrackInfo[] GetPossibleTracks () {
 		return trackInfo
-		.Where(n => n.startLetter == ConvertNextStartLetter())
+		.Where(n => n.startLetter == nextStartLetter)
 		.Select(n => n)
 		.ToArray();
-	}
-	
-	string ConvertNextStartLetter () {
-		switch (nextStartLetter)
-		{	
-			case "F":
-				return "A";
-				
-			case "G":
-				return "B";
-				
-			case "H":
-				return "C";				
-
-			case "I":
-				return "D";
-				
-			case "J":
-				return "E";
-				
-			default:
-				return nextStartLetter;
-		}
-	}
-	
-	string GetFlippedLetter (string letter) {
-		if (flipTrack == false)
-		{
-			return letter;
-		}
-		
-		switch (letter)
-		{
-			case "A":
-				return "B";
-				
-			case "B":
-				return "A";
-				
-			case "C":
-				return "E";
-				
-			case "D":
-				return "D";
-				
-			case "E":
-				return "C";				
-				
-			case "F":
-				return "G";
-				
-			case "G":
-				return "F";
-				
-			case "H":
-				return "J";				
-
-			case "I":
-				return "I";
-				
-			case "J":
-				return "H";
-				
-			default:
-				return letter;
-		}
 	}
 	
 	string GetOppositeLetter (string letter) {
@@ -207,52 +166,13 @@ public class TrackManager : MonoBehaviour {
 		}
 	}
 	
-	Quaternion GetRotation () {
-		switch (nextStartLetter)
-		{
-			case "A":
-				flipTrack = false;
-				return Quaternion.Euler(0, 0, 0);
-
-			case "B":
-				flipTrack = false;
-				return Quaternion.Euler(0, 0, 0);	
-
-			case "C":
-				flipTrack = false;
-				return Quaternion.Euler(0, 0, 0);
-
-			case "D":
-				flipTrack = false;
-				return Quaternion.Euler(0, 0, 0);
-
-			case "E":
-				flipTrack = false;
-				return Quaternion.Euler(0, 0, 0);
-
-			case "F":
-				flipTrack = true;
-				return Quaternion.Euler(0, 180, 0);
-
-			case "G":
-				flipTrack = true;
-				return Quaternion.Euler(0, 180, 0);
-
-			case "H":
-				flipTrack = true;
-				return Quaternion.Euler(180, 0, 0);
-
-			case "I":
-				flipTrack = true;
-				return Quaternion.Euler(180, 0, 0);
-
-			case "J":
-				flipTrack = true;
-				return Quaternion.Euler(180, 0, 0);
-
-			default:
-				return transform.rotation;
-
-		}
+	void OnEnable () {
+		Messenger.AddListener("gameStart", ChangeTrack);
+		Messenger.AddListener("changeTrack", ChangeTrack);
+	}
+	
+	void OnDisable () {
+		Messenger.RemoveListener("gameStart", ChangeTrack);
+		Messenger.RemoveListener("changeTrack", ChangeTrack);
 	}
 }
