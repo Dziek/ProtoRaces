@@ -6,5 +6,6 @@ public class GameManager : MonoBehaviour {
 
 	public void StartGame () {
 		Messenger.Broadcast("gameStart");
+		// Debug.Break();
 	}
 }

@@ -10,6 +10,8 @@ public class TrackManager : MonoBehaviour {
 	public SpriteRenderer godTrack;
 	public Sprite[] trackSprites;
 	public GameObject playerGO;
+	
+	public GameObject levelBounds;
 		
 	public struct TrackInfo {
 		public string startLetter;
@@ -81,6 +83,8 @@ public class TrackManager : MonoBehaviour {
 		letterInfoDictionary.Add("J", letterJ);
 		
 		// ChangeTrack();
+		
+		levelBounds.SetActive(false);
 	}
 	
 	// void Update () {
@@ -90,10 +94,10 @@ public class TrackManager : MonoBehaviour {
 		// }
 	// }
 	
-	// void UpdateScreen () {
-		// ChangeTrack();
-		// UpdatePlayer();
-	// }
+	void GameStart () {
+		ChangeTrack();
+		levelBounds.SetActive(true);
+	}
 	
 	void ChangeTrack () {
 		
@@ -117,14 +121,6 @@ public class TrackManager : MonoBehaviour {
 	
 	void UpdatePlayer () {
 		playerGO.transform.position = letterInfoDictionary[nextStartLetter].playerPos;
-		// playerGO.transform.up = letterInfoDictionary[nextStartLetter].playerRotation;
-		
-		// playerGO.transform.eulerAngles = letterInfoDictionary[nextStartLetter].playerRotation;
-		// playerGO.transform.eulerAngles = letterInfoDictionary[nextStartLetter].playerRotation * 90;
-		
-		// playerGO.transform.rotation = Quaternion.LookRotation(letterInfoDictionary[nextStartLetter].playerRotation);
-		// playerGO.transform.rotation = Quaternion.LookRotation(letterInfoDictionary[nextStartLetter].playerRotation, Vector3.up);
-		
 		
 		Vector2 dir = letterInfoDictionary[nextStartLetter].playerRotation;
 		float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
@@ -178,12 +174,12 @@ public class TrackManager : MonoBehaviour {
 	}
 	
 	void OnEnable () {
-		Messenger.AddListener("gameStart", ChangeTrack);
+		Messenger.AddListener("gameStart", GameStart);
 		Messenger.AddListener("changeTrack", ChangeTrack);
 	}
 	
 	void OnDisable () {
-		Messenger.RemoveListener("gameStart", ChangeTrack);
+		Messenger.RemoveListener("gameStart", GameStart);
 		Messenger.RemoveListener("changeTrack", ChangeTrack);
 	}
 }
