@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour {
 	
-	public float moveSpeed = 10;
-	public float rotSpeed = 10;
+	public float startMoveSpeed = 7.5f;
+	public float startRotationSpeed = 200;
 	
-	// Use this for initialization
-	void Start () {
+	public float speedMultiplier;
+	
+	private float moveSpeed;
+	private float rotSpeed;
+	
+	void OnEnable () {
+		moveSpeed = startMoveSpeed;
+		rotSpeed = startRotationSpeed;
 		
+		AddListeners();
 	}
 	
 	// Update is called once per frame
@@ -43,5 +50,23 @@ public class PlayerControl : MonoBehaviour {
 	
 	void Rotate (float dir) {
 		transform.Rotate(Vector3.forward * (Time.deltaTime * -dir * rotSpeed));
+	}
+	
+	void GetFaster () {
+		// moveSpeed += moveSpeedIncrease;
+		// rotSpeed += rotationSpeedIncrease;
+		
+		moveSpeed *= speedMultiplier;
+		rotSpeed *= speedMultiplier;
+	}
+	
+	void AddListeners () {
+		// Messenger.AddListener("gameStart", GameStart);
+		Messenger.AddListener("scoreUp", GetFaster);
+	}
+	
+	void OnDisable () {
+		// Messenger.RemoveListener("gameStart", GameStart);
+		Messenger.RemoveListener("scoreUp", GetFaster);
 	}
 }

@@ -95,7 +95,11 @@ public class TrackManager : MonoBehaviour {
 	// }
 	
 	void GameStart () {
+		playerGO.SetActive(true);
+		
+		nextStartLetter = "I";
 		ChangeTrack();
+		
 		levelBounds.SetActive(true);
 	}
 	
