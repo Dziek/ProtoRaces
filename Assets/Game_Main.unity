@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.8431373, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1060,7 +1060,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1337,7 +1337,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a3fb6508f7defa94b89b72bb28f7b91b, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -1491,7 +1491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1202441534
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1956,7 +1956,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 7055da7c9aa34694b89141d75710ba1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1994,7 +1994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startMoveSpeed: 7.5
   startRotationSpeed: 220
-  speedMultiplier: 1.02
+  speedMultiplier: 1.04
 --- !u!114 &1609163503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,6 +2017,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f5d3b8df1f15440992771a47316f29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crashEffectGO: {fileID: 1081725918753002, guid: 9793c5de078a9ef43892e817820375b1,
+    type: 2}
+  crashEffectAltGO: {fileID: 1021481966614674, guid: 9f70475a081b30e4faf831674388283b,
+    type: 2}
 --- !u!1 &1692010687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2123,7 +2127,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -144}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 240, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728005357
 MonoBehaviour:
@@ -2221,7 +2225,7 @@ GameObject:
   - component: {fileID: 1729926002}
   m_Layer: 0
   m_Name: Layout
-  m_TagString: Untagged
+  m_TagString: Bad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2263,7 +2267,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 17.824562, y: 10.035088}
+  m_Size: {x: 17.860466, y: 10.046512}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

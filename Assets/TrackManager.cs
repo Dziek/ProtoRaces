@@ -96,11 +96,17 @@ public class TrackManager : MonoBehaviour {
 	
 	void GameStart () {
 		playerGO.SetActive(true);
+		godTrack.gameObject.SetActive(true);
 		
 		nextStartLetter = "I";
 		ChangeTrack();
 		
 		levelBounds.SetActive(true);
+	}
+	
+	void GoToMenu () {
+		godTrack.gameObject.SetActive(false);
+		levelBounds.SetActive(false);
 	}
 	
 	void ChangeTrack () {
@@ -180,10 +186,12 @@ public class TrackManager : MonoBehaviour {
 	void OnEnable () {
 		Messenger.AddListener("gameStart", GameStart);
 		Messenger.AddListener("changeTrack", ChangeTrack);
+		Messenger.AddListener("goToMenu", GoToMenu);
 	}
 	
 	void OnDisable () {
 		Messenger.RemoveListener("gameStart", GameStart);
 		Messenger.RemoveListener("changeTrack", ChangeTrack);
+		Messenger.RemoveListener("goToMenu", GoToMenu);
 	}
 }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	
+	public GameObject crashEffectGO;
+	public GameObject crashEffectAltGO;
+	
 	private bool hasCrashed;
 	
 	void OnTriggerExit2D (Collider2D other) {
@@ -26,19 +29,36 @@ public class Player : MonoBehaviour {
 	// }
 	
 	void OnCollisionEnter2D (Collision2D other) {
-		Crash();
+		
+		if (other.gameObject.tag == "Bad")
+		{
+			Crash();
+			Debug.Log(other.gameObject.name);
+		}
 	}
 	
 	void Crash () {
 		hasCrashed = true;
 		Messenger.Broadcast("crash");
 		
+		GameObject temp = Instantiate(GetCrashEffect(), transform.position, transform.rotation) as GameObject;
 		gameObject.SetActive(false);
 	}
 	
 	void OnEnable () {
 		// gameObject.SetActive(true);
 		hasCrashed = false;
+	}
+	
+	GameObject GetCrashEffect () {
+		int r = Random.Range(0, 12);
+		
+		if (r == 0)
+		{
+			return crashEffectAltGO;
+		}
+		
+		return crashEffectGO;
 	}
 	
 	// void OnEnable () {
