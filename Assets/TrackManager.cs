@@ -33,6 +33,7 @@ public class TrackManager : MonoBehaviour {
 	private Dictionary<string, LetterInfo> letterInfoDictionary = new Dictionary<string, LetterInfo>();
 	
 	private TrackInfo[] trackInfo;
+	private TrackInfo lastTrack;
 	
 	private string nextStartLetter = "I";
 	private PolygonCollider2D pCol;
@@ -124,7 +125,8 @@ public class TrackManager : MonoBehaviour {
 		
 		UpdatePlayer();
 		
-		nextStartLetter = GetOppositeLetter(newTrack.endLetter);	
+		nextStartLetter = GetOppositeLetter(newTrack.endLetter);
+		lastTrack = newTrack;
 		
 		// UpdatePlayer();
 	}
@@ -137,10 +139,10 @@ public class TrackManager : MonoBehaviour {
 		playerGO.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 	
-	// TODO: Make it so cannot get same track twice?
 	TrackInfo[] GetPossibleTracks () {
 		return trackInfo
 		.Where(n => n.startLetter == nextStartLetter)
+		.Where(n => n.sprite != lastTrack.sprite)
 		.Select(n => n)
 		.ToArray();
 	}
