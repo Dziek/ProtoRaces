@@ -1,0 +1,24 @@
+Get a high score - black screen, smoke effects
+
+Die in right place at right times - light something up on home screen, closed portal appears
+
+Get combination of score to beat number in circle - circle lights up
+
+Three numbers appear, have to die to get them to match up (cycles through? even up odd down?
+
+Direction puzzle
+
+---???
+
+Match up death spots puzzle
+
+Rotate around circle puzzle
+
+Final Trial through portal
+
+OTHER:
+Letter puzzle
+Numbers add up puzzle
+Maths puzzle
+Split tracks appear
+Direction effects screens?

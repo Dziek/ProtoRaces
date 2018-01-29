@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4685064479391728}
   - component: {fileID: 82505058331843164}
+  - component: {fileID: 114217307896558168}
   m_Layer: 0
   m_Name: CrashMark
   m_TagString: Untagged
@@ -274,6 +275,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &114217307896558168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081725918753002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac0e6c09fd30dd4093c60cb437e7f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198037119829487940
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -10,6 +10,13 @@ public class Score : MonoBehaviour {
 
 	private int score;
 	private int highScore;
+	private int gamesPlayed;
+	
+	// private PhaseManager phaseManager;
+	
+	// void Awake () {
+		// phaseManager = GetComponent<PhaseManager>();
+	// }
 	
 	void GameStart () {
 		score = 0;
@@ -28,6 +35,16 @@ public class Score : MonoBehaviour {
 		
 		scoreText.text = "Score: " + score.ToString();
 		highScoreText.text = "Best: " + highScore.ToString();
+		
+		gamesPlayed++;
+		
+		// if (score >= 1 && phaseManager.currentPhase == 0)
+		if (score >= 1 && PhaseManager.currentPhase == 0)
+		{
+			Messenger.Broadcast("phase0Complete");
+		}else{
+			Messenger.Broadcast("gameOver");
+		}
 	}
 
 	void OnEnable () {
