@@ -12,7 +12,7 @@ public class PhaseManager : MonoBehaviour {
 	
 	void Phase0Complete () {
 		// phase0Menu.SetActive(true);
-		GameObject go = Instantiate(phase0GO, transform.position, transform.rotation);
+		GameObject go = Instantiate(phase0GO, transform.position + Vector3.forward * -5, transform.rotation);
 		// Invoke("StartEndofPhase0", 2);
 		currentPhase++;
 	}

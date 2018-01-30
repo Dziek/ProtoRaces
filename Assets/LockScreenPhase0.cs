@@ -17,7 +17,11 @@ public class LockScreenPhase0 : MysteriousLockScreen {
 	
 	void ChangeColour () {
 		
-		Debug.Log("Start: " + colourArrayPos);
+		if (colourArrayPos == 0)
+		{
+			SetArrayActive(draggableObjects, false);
+			SetArrayActive(dragContainers, false);
+		}
 		
 		if (colourArrayPos >= colours.Length)
 		{

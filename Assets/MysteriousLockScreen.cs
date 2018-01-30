@@ -10,8 +10,8 @@ public class MysteriousLockScreen : MonoBehaviour {
 	private int noOfUnlocksNeeded;
 	private int noOfUnlocksDone;
 	
-	private Drag[] draggableObjects;
-	private DragContainer[] dragContainers;
+	protected Drag[] draggableObjects;
+	protected DragContainer[] dragContainers;
 	
 	private Vector2[] startingScales;
 	
@@ -28,8 +28,6 @@ public class MysteriousLockScreen : MonoBehaviour {
 		SetArrayActive(dragContainers, false);
 		
 		Invoke("Begin", delayGrow);
-		// StartCoroutine(GrowArray(draggableObjects, timeToGrow));
-		// StartCoroutine(GrowArray(dragContainers, timeToGrow));
 	}
 	
 	void Begin () {
