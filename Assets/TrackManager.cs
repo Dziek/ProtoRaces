@@ -119,6 +119,7 @@ public class TrackManager : MonoBehaviour {
 		Sprite newTrackSprite = newTrack.sprite;
 		
 		godTrack.sprite = newTrackSprite;
+		godTrack.GetComponent<SpriteMask>().sprite = newTrackSprite;
 		
 		Destroy(pCol);
 		pCol = godTrack.gameObject.AddComponent<PolygonCollider2D>();

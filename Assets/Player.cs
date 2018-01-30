@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
 		if (other.gameObject.tag == "Bad")
 		{
 			Crash();
-			Debug.Log(other.gameObject.name);
+			// Debug.Log(other.gameObject.name);
 		}
 	}
 	

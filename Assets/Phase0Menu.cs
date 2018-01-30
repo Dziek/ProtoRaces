@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Phase0Menu : MonoBehaviour {
-
+	
 	public Text text;
+	// public GameObject phase0GO;
 	
 	private string[] script = new string[]{
 			"Well.",

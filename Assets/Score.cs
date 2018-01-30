@@ -39,7 +39,7 @@ public class Score : MonoBehaviour {
 		gamesPlayed++;
 		
 		// if (score >= 1 && phaseManager.currentPhase == 0)
-		if (score >= 1 && PhaseManager.currentPhase == 0)
+		if (score >= 7 && PhaseManager.currentPhase == 0)
 		{
 			Messenger.Broadcast("phase0Complete");
 		}else{
