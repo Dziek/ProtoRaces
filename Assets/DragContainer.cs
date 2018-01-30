@@ -4,23 +4,33 @@ using UnityEngine;
 
 public class DragContainer : MonoBehaviour {
 	
+	private MysteriousLockScreen lockScreen;
 	private Collider2D thisCollider;
+	
+	private bool isFilled;
 	
 	void Awake () {
 		thisCollider = GetComponent<Collider2D>();
+		lockScreen = GetComponentInParent<MysteriousLockScreen>();
 	}
 	
 	void OnTriggerStay2D (Collider2D other) {
 		
-		Drag draggableObject = other.GetComponent<Drag>();
-		if (draggableObject != null) 
+		if (isFilled == false)
 		{
-			if(other.bounds.min.x > thisCollider.bounds.min.x && other.bounds.max.x < thisCollider.bounds.max.x)
+			Drag draggableObject = other.GetComponent<Drag>();
+			if (draggableObject != null) 
 			{
-				// Debug.Log("Tada");
-				
-				draggableObject.Caught();
-				other.transform.position = transform.position;
+				if(other.bounds.min.x > thisCollider.bounds.min.x && other.bounds.max.x < thisCollider.bounds.max.x)
+				{
+					// Debug.Log("Tada");
+					
+					draggableObject.Caught();
+					other.transform.position = transform.position;
+					
+					lockScreen.ContainerFilled();
+					isFilled = true;
+				}
 			}
 		}
 		
